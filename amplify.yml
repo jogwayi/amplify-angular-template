@@ -12,6 +12,7 @@ frontend:
         - npm install -g npm
         - npm install -g @angular/cli
         - ng version
+        - npm install
         - ng build --configuration=production
   artifacts:
     baseDirectory: dist/amplify-angular-template/browser
