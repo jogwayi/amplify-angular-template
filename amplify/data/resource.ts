@@ -10,13 +10,15 @@ const schema = a.schema({
   Todo: a
     .model({
       content: a.string(),
+      author: a.string(),
     })
+    .secondaryIndexes((index) => [index("author").sortKeys(["content"])])
     .authorization((allow) => [allow.publicApiKey()]),
       
   Post: a.customType({
     id: a.id().required(),
-    author: a.string().required(),
-    title: a.string(),
+    author: a.string(),
+    title: a.string().required(),
     content: a.string(),
     url: a.string(),
     ups: a.integer(),
@@ -26,9 +28,9 @@ const schema = a.schema({
   addPost: a
     .mutation()
     .arguments({
-      id: a.id(),
-      author: a.string().required(),
-      title: a.string(),
+      id: a.id().required(),
+      author: a.string(),
+      title: a.string().required(),
       content: a.string(),
       url: a.string(),
     })
@@ -80,6 +82,16 @@ const schema = a.schema({
               entry: "./deletePost.js",
             })
           ),
+          batchGetPost: a
+            .mutation()            
+            .returns(a.ref("Post"))
+            .authorization(allow => [allow.publicApiKey()])
+            .handler(
+              a.handler.custom({
+                dataSource: "ExternalPostTableDataSource",
+                entry: "./batchGetPost.js",
+              })
+            ),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -108,7 +120,7 @@ cases: https://docs.amplify.aws/gen2/build-a-backend/data/connect-to-API/
 /*
 "use client"
 import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
+import type { Schema } from "./amplify/data/resource";
 
 const client = generateClient<Schema>() // use this Data client for CRUDL requests
 */
