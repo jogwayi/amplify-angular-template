@@ -7,7 +7,9 @@ export function request(ctx) {
       operation: "BatchGetItem",
       tables: {
         PostTable: {
-          keys: sort_key.map(sk => util.dynamodb.toMapValues({ product_number_sku: sk, base_store: partition_key })),
+          //keys: sort_key.map(sk => util.dynamodb.toMapValues({ product_number_sku: sk, base_store: partition_key })),
+          // keys: sort_key.map(sk => util.dynamodb.toMapValues({ product_number_sku: sk, base_store: partition_key })),
+          key: util.dynamodb.toMapValues({PK: partition_key, SK: sort_key[0] }),
           consistentRead: true,
         }
       },
