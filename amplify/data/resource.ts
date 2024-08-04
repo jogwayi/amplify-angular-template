@@ -9,89 +9,30 @@ specifies that any user authenticated via an API key can "create", "read",
 const schema = a.schema({
   Todo: a
     .model({
-      content: a.string(),
-      author: a.string(),
+      content: a.string()
     })
-    .secondaryIndexes((index) => [index("author").sortKeys(["content"])])
     .authorization((allow) => [allow.publicApiKey()]),
       
   Post: a.customType({
     id: a.id().required(),
-    author: a.string(),
-    title: a.string().required(),
-    content: a.string(),
+    base_store: a.string(),
+    product_number_sku: a.string().required(),
+    /* content: a.string(),
     url: a.string(),
     ups: a.integer(),
     downs: a.integer(),
-    version: a.integer(),
+    version: a.integer(), */
   }),  
-  addPost: a
-    .mutation()
-    .arguments({
-      id: a.id().required(),
-      author: a.string(),
-      title: a.string().required(),
-      content: a.string(),
-      url: a.string(),
-    })
+  batchGetPost: a
+    .mutation()            
     .returns(a.ref("Post"))
     .authorization(allow => [allow.publicApiKey()])
     .handler(
       a.handler.custom({
         dataSource: "ExternalPostTableDataSource",
-        entry: "./addPost.js",
+        entry: "./batchGetPost.js",
       })
-    ),  
-    getPost: a
-      .query()
-      .arguments({ id: a.id().required() })
-      .returns(a.ref("Post"))
-      .authorization(allow => [allow.publicApiKey()])
-      .handler(
-        a.handler.custom({
-          dataSource: "ExternalPostTableDataSource",
-          entry: "./getPost.js",
-        })
-      ),   
-      updatePost: a
-        .mutation()
-        .arguments({
-          id: a.id().required(),
-          author: a.string(),
-          title: a.string(),
-          content: a.string(),
-          url: a.string(),
-          expectedVersion: a.integer().required(),
-        })
-        .returns(a.ref("Post"))
-        .authorization(allow => [allow.publicApiKey()])
-        .handler(
-          a.handler.custom({
-            dataSource: "ExternalPostTableDataSource",
-            entry: "./updatePost.js",
-          })
-        ),  
-        deletePost: a
-          .mutation()
-          .arguments({ id: a.id().required(), expectedVersion: a.integer() })
-          .returns(a.ref("Post"))
-          .authorization(allow => [allow.publicApiKey()])
-          .handler(
-            a.handler.custom({
-              dataSource: "ExternalPostTableDataSource",
-              entry: "./deletePost.js",
-            })
-          ),
-          batchGetPost: a
-            .mutation()            
-            .returns(a.ref("Post"))
-            .authorization(allow => [allow.publicApiKey()])
-            .handler(
-              a.handler.custom({
-                dataSource: "ExternalPostTableDataSource",
-                entry: "./batchGetPost.js",
-              })
-            ),
+    )
 });
 
 export type Schema = ClientSchema<typeof schema>;
