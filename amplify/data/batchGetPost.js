@@ -4,7 +4,7 @@ export function request(ctx) {
     const partition_key = 'GerberUSA';
     const sort_key = ['07505G','07510G','07520G1'];
     return {
-      operation: "BatchGetItem",
+      operation: "GetItem",
       tables: {
         PostTable: {
           //keys: sort_key.map(sk => util.dynamodb.toMapValues({ product_number_sku: sk, base_store: partition_key })),
