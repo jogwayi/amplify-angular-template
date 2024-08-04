@@ -14,7 +14,6 @@ const schema = a.schema({
     .authorization((allow) => [allow.publicApiKey()]),
       
   Post: a.customType({
-    id: a.id().required(),
     base_store: a.string(),
     product_number_sku: a.string().required(),
     /* content: a.string(),
