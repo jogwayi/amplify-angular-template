@@ -5,15 +5,14 @@ export const request = function(ctx) {
   const { partition_key, sort_key } = ctx.args
     //var key = sort_key.map(sk => util.dynamodb.toMapValues({ product_number_sku: sk, base_store: partition_key }))
     return {
-      operation: "GetItem",
+      operation: "BatchGetItem",
       tables: {
-        PostTable: {
+        PostTable: util.dynamodb.toMapValues({ product_number_sku: sort_key[0], base_store: partition_key }), /* {
           //keys: sort_key.map(sk => util.dynamodb.toMapValues({ product_number_sku: sk, base_store: partition_key })),
           // keys: sort_key.map(sk => util.dynamodb.toMapValues({ product_number_sku: sk, base_store: partition_key })),
-          //key: util.dynamodb.toMapValues({ product_number_sku: sort_key[0], base_store: partition_key }),
-          key: util.dynamodb.toMapValues({ id: ctx.args.id }),
+          key: util.dynamodb.toMapValues({ product_number_sku: sort_key[0], base_store: partition_key }),
           consistentRead: true,
-        }
+        } */
       },
     };
 }

@@ -24,8 +24,12 @@ const schema = a.schema({
     downs: a.integer(),
     version: a.integer(), */
   }),  
-  /* batchGetPost: a
-    .mutation()            
+  batchGetPost: a
+    .query()     
+    .arguments({
+      partition_key: a.string(), 
+      sort_key: a.string().array(),
+    })       
     .returns(a.ref("Post"))
     .authorization(allow => [allow.publicApiKey()])
     .handler(
@@ -33,7 +37,7 @@ const schema = a.schema({
         dataSource: "ExternalPostTableDataSource",
         entry: "./batchGetPost.js",
       })
-    ) */
+    )
 });
 
 export type Schema = ClientSchema<typeof schema>;
