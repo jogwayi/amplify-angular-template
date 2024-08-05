@@ -16,13 +16,8 @@ const schema = a.schema({
     .authorization((allow) => [allow.publicApiKey()]),
       
   Post: a.customType({
-    base_store: a.string(),
-    product_number_sku: a.string().required(),
-    /* content: a.string(),
-    url: a.string(),
-    ups: a.integer(),
-    downs: a.integer(),
-    version: a.integer(), */
+    base_store: a.string().required(),
+    product_number_sku: a.string().required()
   }),  
   batchGetPost: a
     .query()     
