@@ -24,16 +24,16 @@ const schema = a.schema({
     downs: a.integer(),
     version: a.integer(), */
   }),  
-  batchGetPost: a
+  /* batchGetPost: a
     .mutation()            
     .returns(a.ref("Post"))
     .authorization(allow => [allow.publicApiKey()])
     .handler(
       a.handler.custom({
         dataSource: "ExternalPostTableDataSource",
-        entry: "./batchGetPost.ts",
+        entry: "./batchGetPost.js",
       })
-    )
+    ) */
 });
 
 export type Schema = ClientSchema<typeof schema>;
