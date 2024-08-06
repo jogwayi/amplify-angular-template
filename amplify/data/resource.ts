@@ -14,10 +14,10 @@ const schema = a.schema({
       base_store: a.string().required(),
       product_number_sku: a.string().required()
     })
+    .secondaryIndexes((index) => [
+      index("base_store").queryField("listUsersBySearchTerm").sortKeys(["product_number_sku"]),
+    ])
     .authorization((allow) => [allow.publicApiKey()]),
-  PostBatch: a.customType({
-    activePosts: a.ref("Post").array(),
-  }),  
   batchGetPost: a
     .query()
     .arguments({
