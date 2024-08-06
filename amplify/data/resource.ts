@@ -24,7 +24,7 @@ const schema = a.schema({
       base_store: a.string(), 
       product_number_sku: a.string().array(),
     })       
-    .returns(a.ref("Post").array())
+    .returns(a.ref("PostBatch").array())
     .authorization(allow => [allow.publicApiKey()])
     .handler(
       a.handler.custom({
