@@ -9,23 +9,22 @@ specifies that any user authenticated via an API key can "create", "read",
 
 
 const schema = a.schema({
-  Todo: a
+  Post: a
     .model({
-      content: a.string()
+      base_store: a.string().required(),
+      product_number_sku: a.string().required()
     })
     .authorization((allow) => [allow.publicApiKey()]),
-      
-  Post: a.customType({
-    base_store: a.string().required(),
-    product_number_sku: a.string().required()
+  PostBatch: a.customType({
+    activePosts: a.ref("Post").array(),
   }),  
   batchGetPost: a
-    .query()     
+    .query()
     .arguments({
-      partition_key: a.string(), 
-      sort_key: a.string().array(),
+      base_store: a.string(), 
+      product_number_sku: a.string().array(),
     })       
-    .returns(a.ref("Post"))
+    .returns(a.ref("Post").array())
     .authorization(allow => [allow.publicApiKey()])
     .handler(
       a.handler.custom({

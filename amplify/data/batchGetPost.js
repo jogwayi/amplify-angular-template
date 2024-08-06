@@ -2,16 +2,14 @@ import { util } from '@aws-appsync/utils/lib';
 
 
 export const request = function(ctx) {
-  const { partition_key, sort_key } = ctx.args
+  const { base_store, product_number_sku } = ctx.args
   
     return {
       operation: "BatchGetItem",
       tables: {
-        PostTable: [util.dynamodb.toMapValues({ base_store: partition_key })]
-      },
+        posts: [util.dynamodb.toMapValues({ base_store, product_number_sku: product_number_sku[0] })]
+      }
     };
 }
 
-export const response = function (ctx) {
-  return ctx.result;
-}
+export const response = (ctx) => ctx.result;
