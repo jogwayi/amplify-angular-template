@@ -7,7 +7,7 @@ export const request = function(ctx) {
     return {
       operation: "BatchGetItem",
       tables: {
-        posts: [util.dynamodb.toMapValues({ base_store, product_number_sku: product_number_sku[0] })]
+        posts: util.dynamodb.toMapValues({ base_store, product_number_sku: product_number_sku[0] })
       }
     };
 }
