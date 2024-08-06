@@ -24,11 +24,12 @@ const schema = a.schema({
       base_store: a.string(), 
       product_number_sku: a.string().array(),
     })       
-    .returns(a.ref("PostBatch").array())
+    .returns(a.ref("Post").array())
     .authorization(allow => [allow.publicApiKey()])
     .handler(
       a.handler.custom({
-        dataSource: "ExternalPostTableDataSource",
+        //dataSource: "ExternalPostTableDataSource",
+        dataSource: a.ref("Post"),
         entry: "./batchGetPost.js",
       })
     )
