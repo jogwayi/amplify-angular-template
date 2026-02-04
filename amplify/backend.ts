@@ -8,7 +8,7 @@ export const backend = defineBackend({
   sendEmail
 });
 backend.sendEmail.resources.lambda.addFunctionUrl({
-  authType: lambda.FunctionUrlAuthType.NONE,
+  authType: lambda.FunctionUrlAuthType.AWS_IAM,
   cors: {
     allowCredentials: false,
     allowedHeaders: ['*'],
