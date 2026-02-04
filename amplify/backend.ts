@@ -10,7 +10,7 @@ export const backend = defineBackend({
   data,
 });
 backend.sendEmail.resources.lambda.addFunctionUrl({
-  authType: lambda.FunctionUrlAuthType.,
+  authType: lambda.FunctionUrlAuthType.NONE,
   cors: {
     allowCredentials: false,
     allowedHeaders: ['*'],
