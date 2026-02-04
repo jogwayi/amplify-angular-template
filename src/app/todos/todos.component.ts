@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { generateClient } from 'aws-amplify/data';
+import outputs from '../amplify_outputs.json';
 // import type { Schema } from '../../../amplify/data/resource';
 
 // const client = generateClient<Schema>();
