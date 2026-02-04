@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { generateClient } from 'aws-amplify/data';
-import type { Schema } from '../../../amplify/data/resource';
+// import type { Schema } from '../../../amplify/data/resource';
 
 const client = generateClient<Schema>();
 
@@ -16,7 +16,7 @@ export class TodosComponent implements OnInit {
   todos: any[] = [];
 
   ngOnInit(): void {
-    this.listTodos();
+    // this.listTodos();
     testPost()
   }
 
@@ -44,8 +44,7 @@ export class TodosComponent implements OnInit {
     }
 
   }
-
-  listTodos() {
+/*listTodos() {
     try {
       client.models.Todo.observeQuery().subscribe({
         next: ({ items, isSynced }) => {
@@ -66,5 +65,5 @@ export class TodosComponent implements OnInit {
     } catch (error) {
       console.error('error creating todos', error);
     }
-  }
+  }*/
 }
