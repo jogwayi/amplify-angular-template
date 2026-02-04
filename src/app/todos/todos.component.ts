@@ -29,7 +29,7 @@ export class TodosComponent implements OnInit {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({}),
       });
       const result = await response.json();
       
