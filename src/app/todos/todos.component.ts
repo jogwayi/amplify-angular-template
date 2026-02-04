@@ -39,7 +39,7 @@ export class TodosComponent implements OnInit {
         console.log("Error:", result);
       }
     } catch (error) {
-      console.log(`Error:` error`);
+      console.log(`Error:` error);
     }
 
   }
