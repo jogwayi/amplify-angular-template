@@ -17,6 +17,32 @@ export class TodosComponent implements OnInit {
 
   ngOnInit(): void {
     this.listTodos();
+    testPost()
+  }
+
+  async testPost(){
+    try {
+      const functionUrl = outputs.custom.sendEmail.url;
+      
+      const response = await fetch(functionUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      
+      if (response.ok) {
+        setStatus('Email sent successfully!');
+        setFormData({ toAddress: '', fromAddress: '', title: '' });
+      } else {
+        setStatus(`Error: ${result.error}`);
+      }
+    } catch (error) {
+      setStatus(`Error: ${error}`);
+    }
+
   }
 
   listTodos() {
