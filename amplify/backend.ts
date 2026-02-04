@@ -14,7 +14,7 @@ backend.sendEmail.resources.lambda.addFunctionUrl({
   cors: {
     allowCredentials: false,
     allowedHeaders: ['*'],
-    allowedMethods: [aws_cdk.aws_lambda.HttpMethod.POST, aws_cdk.aws_lambda.HttpMethod.OPTIONS],
+    allowedMethods: [lambda.HttpMethod.POST, lambda.HttpMethod.OPTIONS],
     allowedOrigins: ['*'],
   },
 });
