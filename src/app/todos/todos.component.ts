@@ -34,13 +34,12 @@ export class TodosComponent implements OnInit {
       const result = await response.json();
       
       if (response.ok) {
-        setStatus('Email sent successfully!');
-        setFormData({ toAddress: '', fromAddress: '', title: '' });
+        console.log("Response", result)
       } else {
-        setStatus(`Error: ${result.error}`);
+        console.log("Error:", result);
       }
     } catch (error) {
-      setStatus(`Error: ${error}`);
+      console.log(`Error:` error`);
     }
 
   }
