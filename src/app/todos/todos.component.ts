@@ -55,15 +55,15 @@ export class TodosComponent implements OnInit {
       console.error('error fetching todos', error);
     }
   }
-
+*/
   createTodo() {
-    try {
+    /*try {
       client.models.Todo.create({
         content: window.prompt('Todo content'),
       });
       this.listTodos();
     } catch (error) {
       console.error('error creating todos', error);
-    }
-  }*/
+    }*/
+  }
 }
